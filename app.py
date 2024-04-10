@@ -40,7 +40,7 @@ def create_app():
                 login_user(user)
                 return redirect(url_for('table_list'))
             else:
-                return 'Invalid username or password'
+                return render_template('login.html', error='Неправильный логин или пароль')
         return render_template('login.html')
 
     @app.route('/logout')
@@ -148,6 +148,34 @@ def create_app():
     def table_list():
         tables = get_allowed_tables()
         return render_template('table_list.html', tables=tables)
+
+
+    # def role_required(role):
+    #     def wrapper(f):
+    #         @wraps(f)
+    #         def wrapped(*args, **kwargs):
+    #             if current_user.role != role:
+    #                 return 'Access denied'
+    #             return f(*args, **kwargs)
+    #         return wrapped
+    #     return wrapper
+    # @app.route('/boss')
+    # @login_required
+    # @role_required('boss')
+    # def boss_page():
+    #     total_volunteers = Volunteer.query.count()
+    #     active_events = Event.query.filter(Event.end_date >= datetime.now()).count()
+    #     active_projects = Project.query.filter(Project.end_date >= datetime.now()).count()
+    #     return render_template('boss.html', tables=get_allowed_tables(), total_volunteers=total_volunteers,
+    #                            active_events=active_events, active_projects=active_projects)
+
+    @app.errorhandler(404)
+    def page_not_found(error):
+        return render_template('error.html'), 404
+
+    @app.errorhandler(500)
+    def internal_server_error(error):
+        return render_template('error.html', error_code=500, error_message='Внутренняя ошибка сервера'), 500
 
     return app
 

@@ -5,13 +5,25 @@
 {% block content %}
     <h1>Страница руководителя</h1>
 
-    <h2>Дашборд</h2>
-    <!-- Добавить сводную информацию и статистику на дашборд -->
+    <div class="dashboard">
+        <div class="dashboard-item">
+            <h2>Общее количество волонтеров</h2>
+            <p>{{ total_volunteers }}</p>
+        </div>
+        <div class="dashboard-item">
+            <h2>Количество активных мероприятий</h2>
+            <p>{{ active_events }}</p>
+        </div>
+        <div class="dashboard-item">
+            <h2>Количество активных проектов</h2>
+            <p>{{ active_projects }}</p>
+        </div>
+    </div>
 
     <h2>Таблицы</h2>
-    <ul>
+    <div class="table-list">
         {% for table in tables %}
-            <li><a href="{{ url_for('table_view', table_name=table) }}">{{ table }}</a></li>
+            <a href="{{ url_for('table_view', table_name=table) }}" class="table-item">{{ table }}</a>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}

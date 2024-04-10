@@ -4,9 +4,9 @@
 
 {% block content %}
     <h1>Список доступных таблиц</h1>
-    <ul>
+    <div class="table-list">
         {% for table in tables %}
-            <li><a href="{{ url_for('table_view', table_name=table) }}">{{ table }}</a></li>
+            <a href="{{ url_for('table_view', table_name=table) }}" class="table-item">{{ table }}</a>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}
