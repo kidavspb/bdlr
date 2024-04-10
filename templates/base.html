@@ -5,16 +5,26 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{{ url_for('table_list') }}" class="navbar-brand">Волонтерская организация</a>
+            <ul class="navbar-nav">
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('table_list') }}" class="nav-link">Таблицы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('logout') }}" class="nav-link">Выйти</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('login') }}" class="nav-link">Войти</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
     <div class="container">
-        <nav>
-            <a href="{{ url_for('table_list') }}">Главная</a>
-            <a href="{{ url_for('add_volunteer') }}">Добавить волонтера</a>
-            {% if current_user.is_authenticated %}
-                <a href="{{ url_for('logout') }}">Выйти</a>
-            {% else %}
-                <a href="{{ url_for('login') }}">Войти</a>
-            {% endif %}
-        </nav>
         {% block content %}{% endblock %}
     </div>
 </body>
