@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Список волонтеров{% endblock %}
+
+{% block content %}
+    <h1>Список волонтеров</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Телефон</th>
+                <th>Дата рождения</th>
+                <th>Пол</th>
+                <th>Адрес</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for volunteer in volunteers %}
+            <tr>
+                <td>{{ volunteer.id }}</td>
+                <td>{{ volunteer.last_name }}</td>
+                <td>{{ volunteer.first_name }}</td>
+                <td>{{ volunteer.middle_name }}</td>
+                <td>{{ volunteer.phone }}</td>
+                <td>{{ volunteer.birth_date }}</td>
+                <td>{{ volunteer.gender.name }}</td>
+                <td>{{ volunteer.address }}</td>
+                <td>{{ volunteer.email }}</td>
+                <td><a href="{{ url_for('edit_volunteer', volunteer_id=volunteer.id) }}">Редактировать</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

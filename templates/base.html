@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Главная</a>
+        <a href="{{ url_for('add_volunteer') }}">Добавить волонтера</a>
+    </nav>
+    {% block content %}{% endblock %}
+</body>
+</html>

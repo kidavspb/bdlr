@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактировать волонтера{% endblock %}
+
+{% block content %}
+    <h1>Редактировать волонтера</h1>
+    <form method="post" enctype="multipart/form-data">
+        <div>
+            <label for="last_name">Фамилия:</label>
+            <input type="text" id="last_name" name="last_name" value="{{ volunteer.last_name }}" required>
+        </div>
+        <div>
+            <label for="first_name">Имя:</label>
+            <input type="text" id="first_name" name="first_name" value="{{ volunteer.first_name }}" required>
+        </div>
+        <div>
+            <label for="middle_name">Отчество:</label>
+            <input type="text" id="middle_name" name="middle_name" value="{{ volunteer.middle_name }}">
+        </div>
+        <div>
+            <label for="phone">Телефон:</label>
+            <input type="tel" id="phone" name="phone" value="{{ volunteer.phone }}" required>
+        </div>
+        <div>
+            <label for="birth_date">Дата рождения:</label>
+            <input type="date" id="birth_date" name="birth_date" value="{{ volunteer.birth_date }}" required>
+        </div>
+        <div>
+            <label for="gender_id">Пол:</label>
+            <select id="gender_id" name="gender_id">
+                <option value="0" {% if volunteer.gender_id == 0 %}selected{% endif %}>Мужской</option>
+                <option value="1" {% if volunteer.gender_id == 1 %}selected{% endif %}>Женский</option>
+            </select>
+        </div>
+        <div>
+            <label for="address">Адрес:</label>
+            <textarea id="address" name="address">{{ volunteer.address }}</textarea>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ volunteer.email }}">
+        </div>
+        <div>
+            <label for="photo">Фото:</label>
+            <input type="file" id="photo" name="photo">
+        </div>
+        <div>
+            <input type="submit" value="Сохранить">
+        </div>
+    </form>
+{% endblock %}
