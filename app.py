@@ -1,26 +1,18 @@
-from flask import Flask, render_template, request, redirect, url_for
-import mysql.connector
+from flask import Flask
+from database import db
 from config import DB_HOST, DB_USER, DB_PASSWORD, DB_NAME
+from models.volunteer import Volunteer
+# Import other models
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
 
-db = mysql.connector.connect(
-  host=DB_HOST,
-  user=DB_USER,
-  password=DB_PASSWORD,
-  database=DB_NAME
-)
+    db.init_app(app)
 
+    return app
 
-@app.route('/')
-def volunteers():
-    cursor = db.cursor()
-    query = "SELECT * FROM Волонтеры"
-    cursor.execute(query)
-    volunteers = cursor.fetchall()
-    cursor.close()
-    return render_template('volunteers.html', volunteers=volunteers)
-
+app = create_app()
 
 if __name__ == '__main__':
     app.run()
