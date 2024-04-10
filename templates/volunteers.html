@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Волонтеры</title>
+</head>
+<body>
+    <h1>Список волонтеров</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Дата рождения</th>
+        </tr>
+        {% for volunteer in volunteers %}
+        <tr>
+            <td>{{ volunteer[0] }}</td>
+            <td>{{ volunteer[1] }}</td>
+            <td>{{ volunteer[2] }}</td>
+            <td>{{ volunteer[3] }}</td>
+            <td>{{ volunteer[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
