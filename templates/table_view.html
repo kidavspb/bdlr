@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Просмотр таблицы{% endblock %}
+
+{% block content %}
+    <h1>Просмотр таблицы: {{ table_name }}</h1>
+
+    <form method="get">
+        <input type="text" name="search" placeholder="Поиск" value="{{ request.args.get('search', '') }}">
+        <select name="filter_field">
+            <option value="">Выберите поле для фильтрации</option>
+            {% for column in table.columns %}
+                <option value="{{ column.name }}" {% if request.args.get('filter_field') == column.name %}selected{% endif %}>
+                    {{ column.name }}
+                </option>
+            {% endfor %}
+        </select>
+        <input type="text" name="filter_value" placeholder="Значение для фильтрации" value="{{ request.args.get('filter_value', '') }}">
+        <input type="submit" value="Найти">
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                {% for column in table.columns %}
+                    <th>{{ column.name }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                {% for value in result %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -18,4 +18,3 @@ class Volunteer(db.Model):
     gender = db.relationship('Gender', backref='volunteers')
     address = db.Column('Адрес', db.Text)
     email = db.Column('Email', db.Text)
-    photo = db.Column('Фото', db.LargeBinary)

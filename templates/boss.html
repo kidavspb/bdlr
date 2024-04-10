@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Страница руководителя{% endblock %}
+
+{% block content %}
+    <h1>Страница руководителя</h1>
+
+    <h2>Дашборд</h2>
+    <!-- Добавить сводную информацию и статистику на дашборд -->
+
+    <h2>Таблицы</h2>
+    <ul>
+        {% for table in tables %}
+            <li><a href="{{ url_for('table_view', table_name=table) }}">{{ table }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
